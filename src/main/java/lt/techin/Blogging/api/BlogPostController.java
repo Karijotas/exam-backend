@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
+import static lt.techin.Blogging.api.BlogPostMapper.toBlogPost;
+import static lt.techin.Blogging.api.BlogPostMapper.toBlogPostDto;
 import static org.springframework.http.ResponseEntity.ok;
 
 @RestController
@@ -23,7 +25,7 @@ public class BlogPostController {
 
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     @ResponseBody
-    public List<BlogPostEntityDto> getAnimals() {
+    public List<BlogPostEntityDto> getBlogPosts() {
         return blogPostService.getAll().stream()
                 .map(BlogPostMapper::toBlogPostEntityDto)
                 .collect(toList());
@@ -33,7 +35,7 @@ public class BlogPostController {
         var blogPostOptional = blogPostService.getById(blogPostId);
 
         var responseEntity = blogPostOptional
-                .map(book -> ok(blogPost))
+                .map(blogPost -> ok(blogPost))
                 .orElseGet(() -> ResponseEntity.notFound().build());
 
         return responseEntity;

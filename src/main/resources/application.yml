@@ -1,0 +1,15 @@
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  jackson:
+    default-property-inclusion: non_null
+    serialization:
+      write-dates-as-timestamps: false
+    date-format: "yyyy-MM-dd HH:mm"
+  jpa:
+    hibernate:
+      ddl-auto: drop-and-create
+    #      ddl-auto: none
+    #      ddl-auto: drop-and-create
+    generate-ddl: true

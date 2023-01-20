@@ -14,10 +14,10 @@ public class BlogPost {
     private String name;
 
     private String contents;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "comments_id")
-    private List<Comment> comments;
+//
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "comments_id")
+//    private List<Comment> comments;
 
     public Long getId() {
         return id;
@@ -42,26 +42,26 @@ public class BlogPost {
     public void setContents(String contents) {
         this.contents = contents;
     }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
+//
+//    public List<Comment> getComments() {
+//        return comments;
+//    }
+//
+//    public void setComments(List<Comment> comments) {
+//        this.comments = comments;
+//    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BlogPost blogPost = (BlogPost) o;
-        return Objects.equals(getId(), blogPost.getId()) && Objects.equals(getName(), blogPost.getName()) && Objects.equals(getContents(), blogPost.getContents()) && Objects.equals(getComments(), blogPost.getComments());
+        return Objects.equals(getId(), blogPost.getId()) && Objects.equals(getName(), blogPost.getName()) && Objects.equals(getContents(), blogPost.getContents());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getContents(), getComments());
+        return Objects.hash(getId(), getName(), getContents());
     }
 
     @Override
@@ -70,7 +70,6 @@ public class BlogPost {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", contents='" + contents + '\'' +
-                ", comments=" + comments.size() +
                 '}';
     }
 }
