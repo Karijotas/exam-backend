@@ -14,17 +14,6 @@ public class Comment {
 
     private String contents;
 
-    @ManyToOne
-    @JoinColumn(name = "blog_post_id")
-    private BlogPost blogPost;
-
-    public BlogPost getBlogPost() {
-        return blogPost;
-    }
-
-    public void setBlogPost(BlogPost blogPost) {
-        this.blogPost = blogPost;
-    }
 
     public Long getId() {
         return id;
