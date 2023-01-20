@@ -65,6 +65,8 @@ public class BlogPostController {
         return ok(toBlogPostDto(updatedBlogPost));
     }
 
+
+
     @PatchMapping("/{blogPostId}")
     public ResponseEntity<BlogPostDto> updateBlogPost(@PathVariable Long blogPostId, @RequestBody BlogPostDto blogPostDto) {
         var updatedBlogPost = blogPostService.update(blogPostId, toBlogPost(blogPostDto));

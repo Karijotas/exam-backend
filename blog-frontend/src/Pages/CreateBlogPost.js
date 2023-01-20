@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { Link, useHref, useInRouterContext } from "react-router-dom";
 import './CreateBlogPost.css';
+import { FrontPage } from "./FrontPage";
 
 
 export function CreateBlogPostPage() {
@@ -7,6 +9,9 @@ export function CreateBlogPostPage() {
     const [name, setName] = useState("");
     const [summary, setSummary] = useState("");
     const [contents, setContents] = useState("");
+    
+    const [error, setError] = useState();
+
 
     const clear = () => {
         setName("");
@@ -18,9 +23,11 @@ export function CreateBlogPostPage() {
         if (result.ok) {
             clear();
         } else {
-            window.alert("Nepavyko sukurt: " + result.status);
+            window.alert("Nepavyko sukurti, pavadinimas privalo būti unikalus! " + result.status)
+            ;
         }
     };
+
 
 
     const createBlogPost = () => {
@@ -36,24 +43,29 @@ export function CreateBlogPostPage() {
                     contents,
                 
                 })
-        }).then(applyResult)
-        
+        }).then(result => {
+            if (!result.ok) {
+                setError('Antraštė privalo būti unikali!');
+            } else {
+                setError();
+            }
+        }).then(applyResult);
     };
 
     return(<div className="Create">
-        <h2>Create</h2>
+                    
+
+        <h2>Naujas įrašas</h2>
         <form>
         <label>
-          Name:
-          <input type="text" name="name" />
+          Antraštė: <input type="text" className={error} value={name} onChange={(e) => setName(e.target.value)}/>
         </label>
-        <label >Summary:
-
+        <label >Santrauka: {error && (<div className='error'>{error}</div>)}  <input type="text" value={summary} onChange={(e) => setSummary(e.target.value)} />
         </label>
-        <label >Text: 
-
+        <label >Tekstas:  <textarea value={contents} onChange={(e) => setContents(e.target.value)}>
+</textarea>
         </label>
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Submit"  onClick={createBlogPost}/>
       </form>
 
     </div>)

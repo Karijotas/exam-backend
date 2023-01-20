@@ -1,0 +1,4 @@
+--INSERT INTO test.blog_post (name,summary,contents,created_date,modified_date,created_by,modified_by) VALUES
+--	 ('Pirmas blogas', 'kuriame sukuriu įraša', 'Lorem ipsum, irasas', '2023-01-20 12:42', '', 'Mantas', ''),
+--	 ('Antras blogas', 'kuriame sukuriu įraša', 'Lorem ipsum, irasas', '2023-01-20 12:43', '', 'Mantas', ''),
+--	 ('Trečias blogas', 'kuriame sukuriu įraša', 'Lorem ipsum, irasas', '2023-01-20 12:42', '', 'Mantas', ''),

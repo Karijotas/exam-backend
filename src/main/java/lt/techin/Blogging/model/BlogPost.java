@@ -17,19 +17,25 @@ public class BlogPost {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Column(unique=true)
     private String name;
 
     private String summary;
 
     private String contents;
-    //
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "comments_id")
+//
 //    private List<Comment> comments;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     @CreatedDate
     private LocalDateTime createdDate;
+//
+//    public List<Comment> getComments() {
+//        return comments;
+//    }
+//
+//    public void setComments(List<Comment> comments) {
+//        this.comments = comments;
+//    }
 
     public LocalDateTime getCreatedDate() {
         return createdDate;

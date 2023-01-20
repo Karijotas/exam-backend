@@ -12,9 +12,9 @@ function App() {
      <Menu />
 
         <Routes>
-          <Route path='/blogger' element={<FrontPage/>} />
-          <Route path='/blogger/create' element={<CreateBlogPostPage/>}/>
-          <Route path='/blogger/view/:id' element={<ViewBlogPost/>}></Route>
+          <Route path='/' element={<FrontPage/>} />
+          <Route path='/create' element={<CreateBlogPostPage/>}/>
+          <Route path='/view/:id' element={<ViewBlogPost/>}></Route>
         </Routes>
       </HashRouter> 
     </div>

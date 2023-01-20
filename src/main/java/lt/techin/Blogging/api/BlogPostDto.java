@@ -1,8 +1,10 @@
 package lt.techin.Blogging.api;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lt.techin.Blogging.model.Comment;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 public class BlogPostDto {
@@ -17,15 +19,27 @@ public class BlogPostDto {
     private String createdBy;
 
 
+    private List<Comment> comments;
+
+
     public BlogPostDto(){}
 
-    public BlogPostDto( Long id, String name,String summary, String contents, LocalDateTime createdDate, String createdBy) {
+    public BlogPostDto(Long id, String name, String contents, String summary, LocalDateTime createdDate, String createdBy, List<Comment> comments) {
         this.id = id;
         this.name = name;
-        this.summary = summary;
         this.contents = contents;
+        this.summary = summary;
         this.createdDate = createdDate;
         this.createdBy = createdBy;
+        this.comments = comments;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
