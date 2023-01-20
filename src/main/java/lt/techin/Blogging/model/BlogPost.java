@@ -1,6 +1,13 @@
 package lt.techin.Blogging.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
@@ -13,14 +20,59 @@ public class BlogPost {
 
     private String name;
 
+    private String summary;
+
     private String contents;
-//
+    //
 //    @ManyToOne(fetch = FetchType.EAGER)
 //    @JoinColumn(name = "comments_id")
 //    private List<Comment> comments;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+    @CreatedDate
+    private LocalDateTime createdDate;
+
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+    @LastModifiedDate
+    private LocalDateTime modifiedDate;
+
+    @CreatedBy
+    private String createdBy;
+
+    @LastModifiedBy
+    private String modifiedBy;
+
+    @PrePersist
+    public void prePersist() {
+        createdDate = LocalDateTime.now();
+        modifiedDate = LocalDateTime.now();
+        createdBy = "API app";
+        modifiedBy = "API app";
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        modifiedDate = LocalDateTime.now();
+        modifiedBy = "API app";
+    }
 
     public Long getId() {
         return id;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
     public void setId(Long id) {

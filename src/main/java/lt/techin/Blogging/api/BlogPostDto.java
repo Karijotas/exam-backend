@@ -1,5 +1,8 @@
 package lt.techin.Blogging.api;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class BlogPostDto {
@@ -8,13 +11,38 @@ public class BlogPostDto {
     private String name;
 
     private String contents;
+    private String summary;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime createdDate;
+    private String createdBy;
+
 
     public BlogPostDto(){}
 
-    public BlogPostDto( Long id, String name, String contents) {
+    public BlogPostDto( Long id, String name,String summary, String contents, LocalDateTime createdDate, String createdBy) {
         this.id = id;
         this.name = name;
+        this.summary = summary;
         this.contents = contents;
+        this.createdDate = createdDate;
+        this.createdBy = createdBy;
+    }
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+    public void setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
     }
 
     public Long getId() {
@@ -39,6 +67,14 @@ public class BlogPostDto {
 
     public void setContents(String contents) {
         this.contents = contents;
+    }
+
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
     @Override

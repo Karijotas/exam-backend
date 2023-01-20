@@ -23,14 +23,14 @@ public class BlogPostController {
         this.blogPostService = blogPostService;
     }
 
-    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
     public List<BlogPostEntityDto> getBlogPosts() {
         return blogPostService.getAll().stream()
                 .map(BlogPostMapper::toBlogPostEntityDto)
                 .collect(toList());
     }
-    @GetMapping(value = "/{blogPostId}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @GetMapping(value = "/{blogPostId}", produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<BlogPost> getBlogPost(@PathVariable Long blogPostId) {
         var blogPostOptional = blogPostService.getById(blogPostId);
 
@@ -41,7 +41,7 @@ public class BlogPostController {
         return responseEntity;
     }
 
-    @DeleteMapping(value = "/{blogPostId}", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @DeleteMapping(value = "/{blogPostId}", consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<Void> deleteBlogPost(@PathVariable Long blogPostId) {
         boolean deleted = blogPostService.deleteById(blogPostId);
         if (deleted) {
@@ -51,7 +51,7 @@ public class BlogPostController {
         }
     }
 
-    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<BlogPostDto> createBlogPost(@RequestBody BlogPostDto blogPostDto) {
         var createdBlogPost = blogPostService.create(toBlogPost(blogPostDto));
 
